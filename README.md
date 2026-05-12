@@ -33,8 +33,4 @@ Open `index.html` using Live Server in VS Code.
 * Enable Storage
 * Add Firebase config in `firebase.js`
 
-## Author
 
-**Swapna Gedela**
-
-GitHub: [https://github.com/swapna0401](https://github.com/swapna0401)
