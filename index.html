@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NoteNest | Student Resource Sharing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-bg"></div>
+    <div class="overlay"></div>
+
+    <header class="navbar glass">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <h1>NoteNest</h1>
+      </div>
+      <nav class="nav-actions">
+        <button id="profileChip" class="profile-chip hidden" type="button">
+          <span id="profileAvatar" class="avatar">NN</span>
+          <div class="profile-meta">
+            <p class="profile-label">Profile</p>
+            <p id="profileEmail" class="profile-email">Guest</p>
+          </div>
+        </button>
+        <button id="bookmarkToggleBtn" class="btn btn-ghost">Bookmarks</button>
+        <button id="openLoginBtn" class="btn btn-ghost">Login</button>
+        <button id="openSignupBtn" class="btn btn-secondary">Sign Up</button>
+        <button id="logoutBtn" class="btn btn-primary hidden">Logout</button>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="hero glass">
+        <p class="eyebrow">Student Resource Hub</p>
+        <h2>Share and discover quality study resources across every semester.</h2>
+        <p class="subtext">
+          Keep all your class files in one place, share them with friends, and
+          find what you need in seconds.
+        </p>
+      </section>
+
+      <section class="toolbar glass">
+        <div class="search-wrapper">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search by title or subject..."
+            aria-label="Search resources"
+          />
+        </div>
+
+        <select id="semesterFilter" class="input-select" aria-label="Semester filter">
+          <option value="">All Semesters</option>
+          <option value="Semester 1">Semester 1</option>
+          <option value="Semester 2">Semester 2</option>
+          <option value="Semester 3">Semester 3</option>
+          <option value="Semester 4">Semester 4</option>
+          <option value="Semester 5">Semester 5</option>
+          <option value="Semester 6">Semester 6</option>
+          <option value="Semester 7">Semester 7</option>
+          <option value="Semester 8">Semester 8</option>
+        </select>
+
+        <select id="typeFilter" class="input-select" aria-label="Resource type filter">
+          <option value="">All Types</option>
+          <option value="Notes">Notes</option>
+          <option value="PDF">PDF</option>
+          <option value="PPT">PPT</option>
+          <option value="Lab">Lab</option>
+        </select>
+
+        <button id="openUploadBtn" class="btn btn-primary">Upload Resource</button>
+      </section>
+
+      <section id="resourcesGrid" class="resources-grid"></section>
+      <p id="emptyState" class="empty-state glass">
+        No resources found. Try different filters or upload one.
+      </p>
+    </main>
+
+    <div id="loginModal" class="modal hidden">
+      <div class="modal-card glass">
+        <button class="icon-btn close-modal" data-close="loginModal">&times;</button>
+        <h3>Welcome Back</h3>
+        <p>Login to upload and manage resources.</p>
+        <form id="loginForm" class="form">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" required />
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password" required />
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="signupModal" class="modal hidden">
+      <div class="modal-card glass">
+        <button class="icon-btn close-modal" data-close="signupModal">&times;</button>
+        <h3>Create Account</h3>
+        <p>Join NoteNest and share your best study material.</p>
+        <form id="signupForm" class="form">
+          <label for="signupEmail">Email</label>
+          <input id="signupEmail" type="email" required />
+          <label for="signupPassword">Password</label>
+          <input id="signupPassword" type="password" minlength="6" required />
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="uploadModal" class="modal hidden">
+      <div class="modal-card glass large">
+        <button class="icon-btn close-modal" data-close="uploadModal">&times;</button>
+        <h3>Upload Resource</h3>
+        <p>Share notes, PDFs, presentations, or lab files.</p>
+        <form id="uploadForm" class="form">
+          <label for="title">Title</label>
+          <input id="title" type="text" required />
+
+          <label for="subject">Subject</label>
+          <input id="subject" type="text" required />
+
+          <label for="semester">Semester</label>
+          <select id="semester" class="input-select" required>
+            <option value="">Select Semester</option>
+            <option value="Semester 1">Semester 1</option>
+            <option value="Semester 2">Semester 2</option>
+            <option value="Semester 3">Semester 3</option>
+            <option value="Semester 4">Semester 4</option>
+            <option value="Semester 5">Semester 5</option>
+            <option value="Semester 6">Semester 6</option>
+            <option value="Semester 7">Semester 7</option>
+            <option value="Semester 8">Semester 8</option>
+          </select>
+
+          <label for="type">Type</label>
+          <select id="type" class="input-select" required>
+            <option value="">Select Type</option>
+            <option value="Notes">Notes</option>
+            <option value="PDF">PDF</option>
+            <option value="PPT">PPT</option>
+            <option value="Lab">Lab</option>
+          </select>
+
+          <label for="fileInput">File</label>
+          <input id="fileInput" type="file" required />
+
+          <button id="submitUploadBtn" type="submit" class="btn btn-primary">
+            Upload Now
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
